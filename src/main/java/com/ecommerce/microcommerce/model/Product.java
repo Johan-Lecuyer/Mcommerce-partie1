@@ -37,7 +37,7 @@ public class Product {
         this.prixAchat = prixAchat;
     }
 
-    public int getMarge() {
+    public int calcMarge() {
         return this.prix - this.prixAchat;
     }
 
