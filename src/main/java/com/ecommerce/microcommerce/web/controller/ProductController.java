@@ -16,6 +16,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 
 
@@ -82,6 +84,17 @@ public class ProductController {
 
         return ResponseEntity.created(location).build();
     }
+
+    @GetMapping (value = "/AdminProduits")
+    public Dictionary<String, Integer> calculerMargeProduit() {
+        Iterable<Product> products = productDao.findAll();
+        Dictionary<String, Integer> result = new Hashtable<>();
+        for (Product product : products) {
+            result.put(product.toString(), product.getMarge());
+        }
+        return result;
+    }
+
 
     @DeleteMapping (value = "/Produits/{id}")
     public void supprimerProduit(@PathVariable int id) {
