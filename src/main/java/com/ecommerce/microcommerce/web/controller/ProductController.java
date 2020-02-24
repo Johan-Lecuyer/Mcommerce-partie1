@@ -90,11 +90,16 @@ public class ProductController {
         Iterable<Product> products = productDao.findAll();
         Dictionary<String, Integer> result = new Hashtable<>();
         for (Product product : products) {
-            result.put(product.toString(), product.getMarge());
+            result.put(product.toString(), product.calcMarge());
         }
         return result;
     }
 
+    @GetMapping (value = "/ProduitsAsc")
+    public List<Product> trierProduitsParOrdreAlphabetique() {
+        List<Product> products = productDao.findAllByOrderByNom();
+        return products;
+    }
 
     @DeleteMapping (value = "/Produits/{id}")
     public void supprimerProduit(@PathVariable int id) {
